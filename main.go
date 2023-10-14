@@ -1,37 +1,52 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-/*
-	error is an interface
-	type error interface {
-		Error() string
+func fizzbuzz() {
+	for i:=1; i<=100; i++ {
+		if i % 3 == 0 && i % 5 != 0 {
+			fmt.Printf("%v is fizz\n", i)
+		} else if  i % 5 == 0 && i % 3 != 0 {
+			fmt.Printf("%v is buzz\n", i)
+		} else if i % 5 == 0 && i % 3 == 0  {
+			fmt.Printf("%v is fizzbuzz\n", i)
+		} else {
+			fmt.Println(i)
+		}
 	}
-*/
-type DivideError struct {
-	dividend float64
-}
 
-func (d DivideError) Error() string {
-	return fmt.Sprintf("can not divide %v by Zero", d.dividend)
 }
-
-func divide(dividend, divisor float64) (float64, error) {
-	if divisor == 0 {
-		return 0, DivideError{dividend : dividend}
-		// return 0, errors.New("no dividing by 0")
+func findPrimeNumber(max int) {
+	for i := 2; i < max; i++ {
+		if i == 2 {
+			fmt.Println(i)
+			continue
+		}
+		if i % 2 == 0 {
+			continue
+		}
+		isPrime := true
+		for j := 3; j * j < i+1; j++ {
+			if i % j == 0 {
+				isPrime =  false
+				break
+			}
+		}
+		if !isPrime {
+			continue
+		}
+		fmt.Println(i)
 	}
-	return dividend / divisor, nil
+}
+func whileLoop() {
+	treshold := 10
+	for treshold < 20 {
+		treshold++
+	}
+	fmt.Println("While loop", treshold)
 }
 func main() {
-	res, err := divide(2,1);
-	if err != nil {
-		// do something
-		fmt.Println("There is an error")
-	}
-	fmt.Println(res);
-
-
+	fizzbuzz()
+	whileLoop()
+	findPrimeNumber(10)
 }
