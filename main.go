@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
+/*
+	error is an interface
+	type error interface {
+		Error() string
+	}
+*/
 type DivideError struct {
 	dividend float64
 }
@@ -18,7 +26,12 @@ func divide(dividend, divisor float64) (float64, error) {
 	return dividend / divisor, nil
 }
 func main() {
-	fmt.Println(divide(2,1))
-	fmt.Println(divide(2,0))
+	res, err := divide(2,1);
+	if err != nil {
+		// do something
+		fmt.Println("There is an error")
+	}
+	fmt.Println(res);
+
 
 }
